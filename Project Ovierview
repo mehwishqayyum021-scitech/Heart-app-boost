@@ -1,0 +1,15 @@
+Project overview
+Project Title: Clinical Decision Support Prototype: Heart Disease Risk Prediction
+
+Description:
+Developed a functional web application using Python, XGBoost, and Streamlit to explore machine learning applications in cardiovascular risk assessment. This project serves as a technical exercise in deploying predictive models within a health informatics framework.
+
+Key Technical Considerations & Observations:
+
+    Data Source: Utilized the UCI Heart Disease dataset. While a foundational benchmark, I recognize the limitations of its age and sample size for modern clinical application.
+
+    Data Preprocessing: Implemented MICE/k-fold/xgboost) for handling data and calculating the risk. Through this process, I identified that while MICE is robust for general data, its application to complex clinical variables requires careful validation to ensure biological plausibility.
+
+    Model Evaluation: Primary findings indicate the model places significant weight on ECG markers (ST-elevation and ST-slope). While these are critical clinical indicators, the current iteration may under-represent the synergistic effects of demographic factors like age and blood pressure.
+
+    Research Goal: This is a non-clinical practice tool designed to bridge the gap between pharmaceutical expertise and data science. It highlights my ongoing transition into health informatics and my commitment to transparent, reproducible research.
