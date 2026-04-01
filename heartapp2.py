@@ -43,10 +43,10 @@ with st.sidebar:
 # ==========================================
 @st.cache_resource
 def load_assets():
-    model = joblib.load('heart_model1.joblib')
-    imputer = joblib.load('mice_imputer.joblib')
+    # If you only have ONE file, load it like this:
+    pipeline = joblib.load('heart_disease_pipeline.joblib')
     cols = joblib.load('model_columns1.joblib')
-    return model, imputer, cols
+    return pipeline, None, cols # We skip the imputer if it's inside the pipeline
 
 try:
     rf_model, mice_imputer, saved_columns = load_assets()
