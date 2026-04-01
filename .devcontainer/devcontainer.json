@@ -1,0 +1,34 @@
+{
+  "name": "Python 3.12 - Heart Research Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "heartapp2.py"
+      ]
+    },
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "updateContentCommand": "sudo apt update && [ -f packages.txt ] && xargs -a packages.txt sudo apt install -y; pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Environment ready for heartapp2.py'",
+  "postAttachCommand": {
+    "server": "streamlit run heartapp2.py --server.enableCORS false --server.enableXsrfProtection false"
+  },
+  "portsAttributes": {
+    "8501": {
+      "label": "Heart Risk CDSS App",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [
+    8501
+  ]
+}
