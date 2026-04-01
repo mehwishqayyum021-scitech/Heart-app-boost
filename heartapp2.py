@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
+import os
 
 # ==========================================
 # 1. PAGE SETUP & RESEARCHER CREDITS
@@ -41,10 +42,24 @@ with st.sidebar:
 # ==========================================
 # 2. LOAD THE SAVED ARTIFACTS
 # ==========================================
+import os
+
+# This will print every file Streamlit can see in the log
+st.write("Files detected by Streamlit:", os.listdir("."))
+
+@st.cache_resource
+def load_assets():
+    try:
+        model = joblib.load('heart_disease_pipeline.joblib')
+        cols = joblib.load('model_columns1.joblib')
+        return model, None, cols
+    except Exception as e:
+        st.error(f"Error: {e}")
+        st.stop()
 @st.cache_resource
 def load_assets():
     # If you only have ONE file, load it like this:
-    pipeline = joblib.load('heart_disease_pipeline.joblib,joblib')
+    pipeline = joblib.load('heart_disease_pipeline.joblib')
     cols = joblib.load('model_columns1.joblib')
     return pipeline, None, cols # We skip the imputer if it's inside the pipeline
 
