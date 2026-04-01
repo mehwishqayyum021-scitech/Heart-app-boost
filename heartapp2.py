@@ -44,7 +44,7 @@ with st.sidebar:
 @st.cache_resource
 def load_assets():
     # If you only have ONE file, load it like this:
-    pipeline = joblib.load('heart_disease_pipeline.joblib')
+    pipeline = joblib.load('heart_disease_pipeline.joblib,joblib')
     cols = joblib.load('model_columns1.joblib')
     return pipeline, None, cols # We skip the imputer if it's inside the pipeline
 
