@@ -2,28 +2,67 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import os
-from sklearn.experimental import enable_iterative_imputer
-from sklearn.impute import IterativeImputer
+import shap
+import matplotlib.pyplot as plt
 
-# Page setup
+# ==========================================
+# 1. PAGE SETUP & RESEARCHER CREDITS
+# ==========================================
 st.set_page_config(page_title="Heart Risk CDSS", layout="wide")
 
-# 1. Load the Model, MICE Imputer, and Columns
-# Added a check to ensure files exist before loading
-try:
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #ffffff 0%, #e1e8f0 100%);
+    }
+    .stButton>button {
+        background-color: #003366; 
+        color: #e1e8f0;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+with st.sidebar:
+    st.title("🔬 Clinical Metadata")
+    st.info("""
+    **Researcher:** MQ  
+    *PharmD, MSc (Natural Drug Design & Discovery)* *Pharmacist & Aspirant Researcher*
+    
+    **Methodology:**
+    - **Model:** Random Forest Classifier  
+    - **Imputation:** MICE (IterativeImputer)
+    - **Interpretability:** SHAP (XAI)
+    - **Data:** UCI Heart Disease Dataset
+    """)
+    st.warning("**Disclaimer:** This is a research prototype for educational purposes. It is not a validated clinical diagnostic tool.")
+
+# ==========================================
+# 2. LOAD THE SAVED ARTIFACTS
+# ==========================================
+@st.cache_resource
+def load_assets():
     model = joblib.load('heart_model1.joblib')
-    mice_imputer = joblib.load('mice_imputer.joblib')
-    model_columns = joblib.load('model_columns1.joblib')
+    imputer = joblib.load('mice_imputer.joblib')
+    cols = joblib.load('model_columns1.joblib')
+    return model, imputer, cols
+
+try:
+    rf_model, mice_imputer, saved_columns = load_assets()
 except Exception as e:
-    st.error(f"Error loading model files: {e}")
+    st.error("Model files not found. Ensure .joblib files are in the repository.")
     st.stop()
 
-st.title("Heart Disease Risk Predictor")
-st.write("Professional Clinical Decision Support Tool (MICE Imputed)")
+# ==========================================
+# 3. CLINICAL DATA ENTRY 
+# ==========================================
+st.title("🫀 Cardiovascular Risk Prediction Prototype")
+st.write("Enter patient parameters below to generate a risk probability and clinical audit.")
 
-# 2. Input Fields
-col1, col2 = st.columns(2)
+with st.form("clinical_input_form"):
+    col1, col2 = st.columns(2)
+
 
 with col1:
     age = st.number_input("Age", 1, 120, 50)
