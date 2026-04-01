@@ -57,17 +57,17 @@ def load_assets():
         st.error(f"Error: {e}")
         st.stop()
 @st.cache_resource
+@st.cache_resource
 def load_assets():
-    # If you only have ONE file, load it like this:
-    pipeline = joblib.load('heart_disease_pipeline.joblib')
-    cols = joblib.load('model_columns1.joblib')
-    return pipeline, None, cols # We skip the imputer if it's inside the pipeline
-
-try:
-    rf_model, mice_imputer, saved_columns = load_assets()
-except Exception as e:
-    st.error("Model files not found. Ensure .joblib files are in the repository.")
-    st.stop()
+    try:
+        # Match the EXACT names from your Streamlit list:
+        model = joblib.load('heart_disease_pipeline.joblib')
+        imputer = joblib.load('mice_imputer(1).joblib')  # Added the (1)
+        cols = joblib.load('model_columns1(2).joblib')   # Added the (2)
+        return model, imputer, cols
+    except Exception as e:
+        st.error(f"Error loading files: {e}")
+        st.stop()
 
 # ==========================================
 # 3. CLINICAL DATA ENTRY 
