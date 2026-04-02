@@ -105,8 +105,8 @@ if st.button("Analyze Risk"):
     # Apply One-Hot Encoding
     input_encoded = pd.get_dummies(input_df)
 
-    # REINDEX: FIXED the variable name here to match the loaded 'model_columns'
-    final_input = input_encoded.reindex(columns=model_columns, fill_value=np.nan)
+    # REINDEX: FIXED the variable name here to match the loaded 'model_columns1'
+    final_input = input_encoded.reindex(columns=model_columns1, fill_value=np.nan)
 
     # Ensure float datatype
     final_input = final_input.astype(float)
