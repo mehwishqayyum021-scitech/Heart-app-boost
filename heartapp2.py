@@ -40,7 +40,7 @@ def load_assets():
         # Using the exact names from your repository list
         model = joblib.load('heart_disease_pipeline.joblib')
         imputer = joblib.load('mice_imputer(1).joblib') 
-        cols = joblib.load('model_columns1(2),joblib')
+        cols = joblib.load('model_columns1(2).joblib')
         return model, imputer, cols
     except Exception as e:
         st.error(f" Error loading files: {e}")
