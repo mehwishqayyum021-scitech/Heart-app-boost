@@ -16,7 +16,7 @@ st.markdown("""
     .stApp {
         background: linear-gradient(135deg, #ffffff 0%, #e1e8f0 100%);
     }
-    .stButton>button {
+    .stanalyze risk>analyse risk {
         background-color: #003366; 
         color: #e1e8f0;
         font-weight: bold;
