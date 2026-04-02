@@ -51,7 +51,7 @@ st.write("Files detected by Streamlit:", os.listdir("."))
 def load_assets():
     try:
         model = joblib.load('heart_disease_pipeline.joblib')
-        cols = joblib.load('model_columns1.joblib')
+        cols = joblib.load('model_columns1(2).joblib')
         return model, None, cols
     except Exception as e:
         st.error(f"Error: {e}")
@@ -105,8 +105,8 @@ if st.button("Analyze Risk"):
     # Apply One-Hot Encoding
     input_encoded = pd.get_dummies(input_df)
 
-    # REINDEX: FIXED the variable name here to match the loaded 'model_columns1'
-    final_input = input_encoded.reindex(columns=model_columns1, fill_value=np.nan)
+    # REINDEX: FIXED the variable name here to match the loaded 'model_columns1(2)'
+    final_input = input_encoded.reindex(columns=model_columns1(2), fill_value=np.nan)
 
     # Ensure float datatype
     final_input = final_input.astype(float)
